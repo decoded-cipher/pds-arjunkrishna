@@ -1,7 +1,7 @@
 {
 	// AT Protocol PDS on Cloudflare Workers
 	// Run `pnpm pds init` to configure, or `pnpm pds init --production` to deploy secrets
-	"name": "my-pds",
+	"name": "pds-arjunkrishna",
 	"main": "src/index.ts",
 	"compatibility_date": "2025-12-02",
 	"compatibility_flags": [
@@ -44,11 +44,11 @@
 	// R2 bucket for blob storage (optional - create via Cloudflare dashboard)
 	// Uploads are staged under `<did>/staged/` until a record references
 	// them. Add a lifecycle rule to expire abandoned uploads, e.g.:
-	//   wrangler r2 bucket lifecycle add pds-blobs --prefix "<did>/staged/" --expire-days 7
+	//   wrangler r2 bucket lifecycle add pds-arjunkrishna-blobs --prefix "<did>/staged/" --expire-days 7
 	"r2_buckets": [
 		{
 			"binding": "BLOBS",
-			"bucket_name": "pds-blobs"
+			"bucket_name": "pds-arjunkrishna-blobs"
 		}
 	],
 	// Environment variables (public config)
@@ -63,7 +63,7 @@
 		// ⚠️  DATA_LOCATION: Controls where your Durable Objects are created.
 		// ⚠️  WARNING: This CANNOT be changed after deployment!
 		// ⚠️  Changing this value after your PDS is live will break your installation.
-		"DATA_LOCATION": ""
+		"DATA_LOCATION": "auto"
 		// Atproto spaces (ALPHA). Set to "true" to enable the space and
 		// simplespace endpoints. Everything is alpha: a breaking upstream
 		// change is absorbed by `pds spaces reset`, which wipes space data
