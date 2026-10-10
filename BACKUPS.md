@@ -2,6 +2,8 @@
 
 A weekly GitHub Action ([.github/workflows/backup.yml](.github/workflows/backup.yml)) runs [scripts/backup.mjs](scripts/backup.mjs) on Sundays at 03:17 UTC. It can also be started by hand from the Actions tab ("Run workflow").
 
+Every run, including failed ones, posts to Discord ([scripts/notify.mjs](scripts/notify.mjs)): records, blobs, size and records per app on success, or which step failed, plus live health checks (PDS online, DID → PDS, handle, relay in sync, AppView, rotation keys still recovery-only). Each check shows ✅ OK, ❌ a real problem, or ❔ the service it relies on didn't answer. The embed turns amber if the backup worked but a check shows ❌; ❔ alone doesn't change the colour. It uses the `DISCORD_WEBHOOK_URL` repo secret, the same webhook as `gitlab-mirror`. Without that secret the step is skipped.
+
 ## What a snapshot contains
 
 ```

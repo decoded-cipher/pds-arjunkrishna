@@ -18,6 +18,7 @@ jobs:
     env:
       PDS_URL: https://pds.arjunkrishna.dev
       DID: did:plc:xeekykjmi3phlx6ld3erw5xw
+      RECOVERY_KEY: did:key:zQ3shfM8Nt6qeAW6Sy3BZDMguybS1XymDNrXauoqJYGSVk7bc
       R2_BUCKET: pds-arjunkrishna-blobs
       R2_ENDPOINT: https://dbb0b74b710f983689a9d222e325d2ec.r2.cloudflarestorage.com
     steps:
@@ -60,3 +61,13 @@ jobs:
             jq '{commit, rev, records, recordCounts, blobCount, car: .car.size}' "out/$SNAPSHOT/manifest.json"
             echo '```'
           } >> "$GITHUB_STEP_SUMMARY"
+
+      - name: Send Discord notification
+        if: always()
+        env:
+          DISCORD_WEBHOOK_URL: ${{ secrets.DISCORD_WEBHOOK_URL }}
+          SNAPSHOT: ${{ steps.snapshot.outputs.snapshot }}
+          SNAPSHOT_RESULT: ${{ steps.snapshot.outcome }}
+          UPLOAD_RESULT: ${{ steps.upload.outcome }}
+          MANIFEST: out/${{ steps.snapshot.outputs.snapshot }}/manifest.json
+        run: node scripts/notify.mjs
