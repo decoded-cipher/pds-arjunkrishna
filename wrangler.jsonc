@@ -55,15 +55,18 @@
 	// These are set by `pds init` or can be edited manually
 	"vars": {
 		// Public hostname of the PDS (e.g., "pds.example.com")
-		"PDS_HOSTNAME": "",
+		"PDS_HOSTNAME": "pds.arjunkrishna.dev",
 		// Account DID - usually did:web:<hostname>
-		"DID": "",
+		"DID": "did:plc:xeekykjmi3phlx6ld3erw5xw",
 		// Account handle (e.g., "alice.example.com")
-		"HANDLE": "",
+		"HANDLE": "arjunkrishna.dev",
 		// ⚠️  DATA_LOCATION: Controls where your Durable Objects are created.
 		// ⚠️  WARNING: This CANNOT be changed after deployment!
 		// ⚠️  Changing this value after your PDS is live will break your installation.
-		"DATA_LOCATION": "auto"
+		"DATA_LOCATION": "auto",
+		"SIGNING_KEY_PUBLIC": "zQ3shn8m24V2Rj2z3o8UePLiu55SxJ7qhhCEqctbfzVWqeWzT",
+		"INITIAL_ACTIVE": "false",
+		"EMAIL": "mail@arjunkrishna.dev"
 		// Atproto spaces (ALPHA). Set to "true" to enable the space and
 		// simplespace endpoints. Everything is alpha: a breaking upstream
 		// change is absorbed by `pds spaces reset`, which wipes space data
@@ -77,5 +80,11 @@
 	// - PASSWORD_HASH: Bcrypt hash of account password (for Bluesky app login)
 	"observability": {
 		"enabled": true
-	}
+	},
+	"routes": [
+		{
+			"pattern": "pds.arjunkrishna.dev",
+			"custom_domain": true
+		}
+	]
 }
